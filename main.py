@@ -21,6 +21,12 @@ class Tank:
         self.rect = pygame.Rect(px, py, TILE, TILE)
         self.direct = direct
         self.moveSpeed = 2
+        self.hp = 5
+
+        self.shotTimer = 0
+        self.shotDelay = 60
+        self.bulletSpeed = 5
+        self.bulletDamage = 1
 
         self.keyLEFT = keyList[0]
         self.keyRIGHT = keyList[1]
