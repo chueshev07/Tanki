@@ -1,3 +1,10 @@
+main_0_2_стрельба
+и
+столкновения
+снарядов
+с
+объектами.py
+# Стрельба и столкновение снарядов с объектами
 import pygame
 
 pygame.init()
@@ -68,6 +75,8 @@ class Tank:
         if self.hp <= 0:
             objects.remove(self)
             print(self.color, 'dead')
+
+
 class Bullet:
     def __init__(self, parent, px, py, dx, dy, damage):
         bullets.append(self)
@@ -92,20 +101,9 @@ class Bullet:
     def draw(self):
         pygame.draw.circle(window, 'yellow', (self.px, self.py), 2)
 
-Tank('blue', 100, 275, 0, (pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s, pygame.K_SPACE))
-Tank('red', 650, 275, 0, (pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN, pygame.K_KP_ENTER))
-    def draw(self):
-        pygame.draw.rect(window, self.color, self.rect)
-
-        x = self.rect.centerx + DIRECTS[self.direct][0] * 30
-        y = self.rect.centery + DIRECTS[self.direct][1] * 30
-        pygame.draw.line(window, 'white', self.rect.center, (x, y), 4)
 
 bullets = []
 objects = []
-Tank('blue', 100, 275, 0, (pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s, pygame.K_SPACE))
-Tank('red', 650, 275, 0, (pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN, pygame.K_KP_ENTER))
-
 Tank('blue', 100, 275, 0, (pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s, pygame.K_SPACE))
 Tank('red', 650, 275, 0, (pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN, pygame.K_KP_ENTER))
 
@@ -117,9 +115,11 @@ while play:
 
     keys = pygame.key.get_pressed()
 
+    for bullet in bullets: bullet.update()
     for obj in objects: obj.update()
 
     window.fill('black')
+    for bullet in bullets: bullet.draw()
     for obj in objects: obj.draw()
 
     pygame.display.update()
