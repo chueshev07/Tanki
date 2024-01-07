@@ -7,7 +7,7 @@ FPS = 60
 TILE = 32
 
 window = pygame.display.set_mode((WIDTH, HEIGHT))
-clock = pygame.time.Clock()was
+clock = pygame.time.Clock()
 
 DIRECTS = [[0, -1], [1, 0], [0, 1], [-1, 0]]
 
@@ -68,6 +68,7 @@ class Tank:
         if self.hp <= 0:
             objects.remove(self)
             print(self.color, 'dead')
+
 class Bullet:
     def __init__(self, parent, px, py, dx, dy, damage):
         bullets.append(self)
@@ -91,11 +92,6 @@ class Bullet:
 
     def draw(self):
         pygame.draw.circle(window, 'yellow', (self.px, self.py), 2)
-
-
-        x = self.rect.centerx + DIRECTS[self.direct][0] * 30
-        y = self.rect.centery + DIRECTS[self.direct][1] * 30
-        pygame.draw.line(window, 'white', self.rect.center, (x, y), 4)
 
 bullets = []
 objects = []
