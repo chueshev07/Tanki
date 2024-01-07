@@ -1,5 +1,5 @@
 import pygame
-
+from random import randint
 pygame.init()
 
 WIDTH, HEIGHT = 800, 600
@@ -93,10 +93,41 @@ class Bullet:
     def draw(self):
         pygame.draw.circle(window, 'yellow', (self.px, self.py), 2)
 
+class Block:
+    def __init__(self, px, py, size):
+        objects.append(self)
+        self.type = 'block'
+
+        self.rect = pygame.Rect(px, py, size, size)
+        self.hp = 1
+
+    def update(self):
+        pass
+
+    def draw(self):
+        pygame.draw.rect(window, 'green', self.rect)
+        pygame.draw.rect(window, 'gray20', self.rect, 2)
+
+    def damage(self, value):
+        self.hp -= value
+        if self.hp <= 0: objects.remove(self)
+
 bullets = []
 objects = []
 Tank('blue', 100, 275, 0, (pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s, pygame.K_SPACE))
 Tank('red', 650, 275, 0, (pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN, pygame.K_KP_ENTER))
+for _ in range(50):
+    while True:
+        x = randint(0, WIDTH // TILE - 1) * TILE
+        y = randint(0, HEIGHT // TILE - 1) * TILE
+        rect = pygame.Rect(x, y, TILE, TILE)
+        fined = False
+        for obj in objects:
+            if rect.colliderect(obj.rect): fined = True
+
+        if not fined: break
+
+    Block(x, y, TILE)
 play = True
 while play:
     for event in pygame.event.get():
