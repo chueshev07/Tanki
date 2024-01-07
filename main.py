@@ -94,11 +94,11 @@ class Bullet:
         pygame.draw.circle(window, 'yellow', (self.px, self.py), 2)
 
 class Block:
-    def __init__(self, px, py, size):
+    def __init__(self, px, py):
         objects.append(self)
         self.type = 'block'
 
-        self.rect = pygame.Rect(px, py, size, size)
+        self.rect = pygame.Rect(px, py, 100, 100)
         self.hp = 1
 
     def update(self):
